@@ -81,11 +81,19 @@ function Reset(xy : int) {
 }
 
 function OnTileCenter(xy : int) {
-	if(farting && !isInFart && fuel > 0.0) {
+/*	if(farting && !isInFart && fuel > 0.0) {
 		fuel -= 2.0;
 		Instantiate(Fart, boardManager.GetCenter(xy)+Vector3(0, 0.25, 0) , Fart.transform.rotation);
 	}
-	boardManager.UpdatePlayerXY(xy);
+*/	boardManager.UpdatePlayerXY(xy);
+}
+
+function furt() {
+	if(!isInFart && fuel > 0.0) {
+		var xy = boardManager.GetBoardXY(transform.position.x, transform.position.z);
+		fuel -= 2.0;
+		Instantiate(Fart, boardManager.GetCenter(xy)+Vector3(0, 0.25, 0) , Fart.transform.rotation);
+	}
 }
 
 function SetAccelerated(input : boolean) {

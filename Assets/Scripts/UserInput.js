@@ -54,9 +54,11 @@ function GetButtons() {
 		mainCharacter.SetAccelerated(false);
 	}
 	if(Input.GetButton("Fire1")) {
-		mainCharacter.SetFarting(true);
+/*		mainCharacter.SetFarting(true);
 	} else {
 		mainCharacter.SetFarting(false);
+*/
+		mainCharacter.furt();
 	}
 }
 
@@ -93,6 +95,21 @@ function GetReversed(_direction : Vector3) {
 	if(currentInput == reversed) {
 		return true;
 	} else {
+		return false;
+	}
+}
+
+function GetReversedLeaving(_direction : Vector3) {
+	if(_direction == Vector3.zero) {
+		return false;
+	}
+	
+	if(currentInput == _direction) {
+		return false;
+	} else {
+		if(CheckDirection(currentInput)) {
+			return true;
+		}
 		return false;
 	}
 }

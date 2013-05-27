@@ -28,7 +28,10 @@ var xy : int;
 var speed : float = 0;
 private var direction : Vector3;
 private var stopped : boolean;
-private var movingState : int;
+
+// State machine
+private enum movingStates {idle, leaveCenter, leaveTile, enterTile, checkDirection};
+private var state : movingStates;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -39,7 +42,7 @@ private var movingState : int;
 function Reset(_xy : int) {	
 	direction = Vector3.zero;
 	stopped = true;
-	movingState = 0;
+	state = 0;
 	xy = _xy;
 	transform.position = boardManager.GetCenter(xy);
 	if(userInput != null) {
@@ -53,8 +56,8 @@ function Move() {
 	}
 
 	xy = boardManager.GetBoardXY(transform.position.x, transform.position.z);
-	switch(movingState) {
-	case 0:	// Idle
+	switch(state) {
+	case movingStates.idle:
 		if(userInput != null) {
 			direction = userInput.GetInput(xy, direction);
 		} else {
@@ -62,30 +65,44 @@ function Move() {
 		}
 		
 		if(direction != Vector3.zero) {
-			movingState = 1;
+			state = movingStates.leaveCenter;
 		}
 		break;
 		
-	case 1: // Leave center
+	case movingStates.leaveCenter:
 		transform.Translate(direction * speed * Time.deltaTime);
-		movingState = 2;
+		state = movingStates.leaveTile;
 		break;
 		
-	case 2:	// Moving
+	case movingStates.leaveTile:
+		if(userInput != null) {
+			if(userInput.GetReversedLeaving(direction)) {
+				direction = direction*(-1);
+				state = movingStates.enterTile;
+			}
+		}
+		transform.Translate(direction * speed * Time.deltaTime);
+		if(boardManager.GetBoardXY(transform.position.x, transform.position.z) != xy) {
+			state = movingStates.enterTile;
+		}		
+		break;
+		
+	case movingStates.enterTile:
 		if(Vector3.Distance(transform.position, boardManager.GetCenter(xy)) < speed*Time.deltaTime) {
 			transform.position = boardManager.GetCenter(xy);
-			movingState = 3;
+			state = movingStates.checkDirection;
 		} else {
 			if(userInput != null) {
 				if(userInput.GetReversed(direction)) {
 					direction = direction*(-1);
+					state = movingStates.leaveTile;
 				}
 			}
 			transform.Translate(direction * speed * Time.deltaTime);
 		}
 		break;
 		
-	case 3:	 // Check direction
+	case movingStates.checkDirection:
 		if(userInput != null) {
 			direction = userInput.GetInput(xy, direction);
 			SendMessage("OnTileCenter", xy);
@@ -94,10 +111,10 @@ function Move() {
 		}
 		
 		if(direction == Vector3.zero) {
-			movingState = 0;
+			state = movingStates.idle;
 		} else {
 			transform.Translate(direction * speed * Time.deltaTime);
-			movingState = 1;
+			state = movingStates.leaveCenter;
 		}
 		break;
 	}

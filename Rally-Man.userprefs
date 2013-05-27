@@ -1,10 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UserInput.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainCharacter.js">
     <Files>
-      <File FileName="Assets\Scripts\UserInput.js" Line="92" Column="34" />
-      <File FileName="Assets\Scripts\MainCharacter.js" Line="62" Column="38" />
-      <File FileName="Assets\Scripts\CharacterMovement.js" Line="46" Column="21" />
+      <File FileName="Assets\Scripts\MainCharacter.js" Line="93" Column="80" />
+      <File FileName="Assets\Scripts\UserInput.js" Line="61" Column="24" />
+      <File FileName="Assets\Scripts\CharacterMovement.js" Line="88" Column="9" />
+      <File FileName="Assets\Scripts\GameManager.js" Line="129" Column="17" />
+      <File FileName="Assets\Scripts\BoardManager.js" Line="78" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
