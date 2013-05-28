@@ -55,7 +55,6 @@ private var nextFlag : int;
 private var initialSpeed : float = 1.2;
 private var speed : float = 1.2;
 var accelerated : boolean;
-var farting : boolean;
 var isInFart : boolean;
 var paused : boolean;
 
@@ -70,7 +69,6 @@ function Reset(xy : int) {
 	nextFlag = 100;
 	
 	accelerated = false;
-	farting = false;
 	isInFart = false;
 	paused = true;
 	
@@ -81,11 +79,7 @@ function Reset(xy : int) {
 }
 
 function OnTileCenter(xy : int) {
-/*	if(farting && !isInFart && fuel > 0.0) {
-		fuel -= 2.0;
-		Instantiate(Fart, boardManager.GetCenter(xy)+Vector3(0, 0.25, 0) , Fart.transform.rotation);
-	}
-*/	boardManager.UpdatePlayerXY(xy);
+	boardManager.UpdatePlayerXY(xy);
 }
 
 function furt() {
@@ -111,10 +105,6 @@ function SetAccelerated(input : boolean) {
 	}
 }
 
-function SetFarting(input : boolean) {
-	farting = input;
-}
-
 function SetIsInFart(input : boolean) {
 	isInFart = input;
 }
@@ -133,7 +123,7 @@ function OnTriggerEnter(collider : Collider) {
 	if(collider.tag != "Flag-Normal" && collider.tag != "Flag-S") {
 		return;
 	}
-	Destroy(collider.gameObject, 0.2);
+	Destroy(collider.gameObject);
 	
 	if(collider.tag == "Flag-S") {
 		flagS = 2;

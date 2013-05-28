@@ -27,11 +27,11 @@ private var aiInput : AiInput = null;
 var xy : int;
 var speed : float = 0;
 private var direction : Vector3;
-private var stopped : boolean;
+var stopped : boolean;
 
 // State machine
 private enum movingStates {idle, leaveCenter, leaveTile, enterTile, checkDirection};
-private var state : movingStates;
+var state : movingStates;
 
 ///////////////////////////////////////////////////////////////////////////////
 //

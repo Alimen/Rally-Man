@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MainCharacter.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemy.js">
     <Files>
-      <File FileName="Assets\Scripts\MainCharacter.js" Line="93" Column="80" />
-      <File FileName="Assets\Scripts\UserInput.js" Line="61" Column="24" />
-      <File FileName="Assets\Scripts\CharacterMovement.js" Line="88" Column="9" />
-      <File FileName="Assets\Scripts\GameManager.js" Line="129" Column="17" />
-      <File FileName="Assets\Scripts\BoardManager.js" Line="78" Column="20" />
+      <File FileName="Assets\Scripts\Enemy.js" Line="28" Column="31" />
+      <File FileName="Assets\Scripts\MeetFart.js" Line="18" Column="30" />
+      <File FileName="Assets\Scripts\Spinning.js" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\MainCharacter.js" Line="137" Column="41" />
+      <File FileName="Assets\Scripts\CharacterMovement.js" Line="46" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

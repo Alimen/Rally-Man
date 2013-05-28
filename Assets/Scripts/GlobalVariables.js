@@ -12,4 +12,4 @@ var level : int = 1;
 var life : int = 3;
 var hiscore : int = 10000;
 var score : int = 0;
-var nextLife : int = 4000;
+var nextLife : int = 8000;

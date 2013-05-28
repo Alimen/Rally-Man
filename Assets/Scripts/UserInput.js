@@ -54,10 +54,6 @@ function GetButtons() {
 		mainCharacter.SetAccelerated(false);
 	}
 	if(Input.GetButton("Fire1")) {
-/*		mainCharacter.SetFarting(true);
-	} else {
-		mainCharacter.SetFarting(false);
-*/
 		mainCharacter.furt();
 	}
 }

@@ -154,7 +154,7 @@ function SetupGame() {
 		globalVariables.level = 1;
 		globalVariables.life = 3;
 		globalVariables.score = 0;
-		globalVariables.nextLife = 4000;
+		globalVariables.nextLife = 8000;
 	}
 	
 	// 2. Change to a new stage
@@ -252,6 +252,10 @@ function SetPause(input : boolean) {
 		pauseSlide.Stop();
 	}
 	SendPauseMessage(pause);
+}
+
+function GetPause() {
+	return pause;
 }
 
 function SendPauseMessage(input : boolean) {

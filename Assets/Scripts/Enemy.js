@@ -6,6 +6,16 @@ function Start() {
 	aiInput = GetComponent(AiInput);
 }
 
+function Update() {
+	if(paused) {
+		return;
+	}
+
+	if(isInFart) {
+		transform.RotateAround(fartPos, Vector3.up, 360*Time.deltaTime);
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Variable declarations
@@ -19,8 +29,9 @@ private var aiInput : AiInput;
 
 // Status variables
 private var initialSpeed : float = 1.2;
-private var paused : boolean;
-private var isInFart : boolean;
+var paused : boolean;
+var isInFart : boolean;
+private var fartPos : Vector3;
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -33,28 +44,36 @@ function Reset(xy : int, aiLevel : int) {
 	isInFart = false;
 	characterMovement.speed = initialSpeed;
 	characterMovement.Reset(xy);
+	transform.rotation = Quaternion.identity;
+	if(gameObject.GetComponent(Spinning) != null) {
+		Destroy(gameObject.GetComponent(Spinning));
+	}
 	aiInput.Reset(aiLevel);
 }
 
 function SetStopped(input : boolean) {
 	paused = input;
-	characterMovement.SetStopped(paused);
+	if(paused) {
+		characterMovement.SetStopped(true);
+	} else {
+		characterMovement.SetStopped(isInFart);
+	}
 }
 
 function SetIsInFart(input : boolean) {
 	if(isInFart == input) {
 		return;
 	}
-	
+
 	isInFart = input;
 	if(isInFart) {
-		gameObject.AddComponent(Spinning);
+		fartPos = transform.position;
 		gameObject.tag = "Untagged";
-		SetStopped(true);
+		characterMovement.SetStopped(true);
 	} else {
-		Destroy(gameObject.GetComponent(Spinning));
 		transform.rotation = Quaternion.identity;
+		transform.position = fartPos;
 		gameObject.tag = "Enemy";
-		SetStopped(false);
+		characterMovement.SetStopped(paused);
 	}
 }
